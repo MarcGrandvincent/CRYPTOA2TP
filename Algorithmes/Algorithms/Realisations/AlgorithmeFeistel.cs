@@ -10,19 +10,23 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 {
     public class AlgorithmeFeistel
     {
-        string[] sbox;
+        private List<string> sbox = new List<string>();
 
         public AlgorithmeFeistel()
         {
             FileStream f = new FileStream(".\\Resources\\sbox.txt", FileMode.Open);
             StreamReader sr = new StreamReader(f);
 
-            while (sr.EndOfStream)
+            while (!sr.EndOfStream)
             {
                 string[] line = sr.ReadLine().Split(',');
                 foreach (string s in line)
                 {
-                    sbox.SetValue(s, sbox.Count());
+                    if (s != "")
+                    {
+                        sbox.Add(s);
+                    }
+
                 }
             }
 
