@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -9,39 +11,62 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
     public class AlgorithmeFeistel
     {
         string[] sbox;
-        
+
+        public AlgorithmeFeistel()
+        {
+            FileStream f = new FileStream(".\\Resources\\sbox.txt", FileMode.Open);
+            StreamReader sr = new StreamReader(f);
+
+            while (sr.EndOfStream)
+            {
+                string[] line = sr.ReadLine().Split(',');
+                foreach (string s in line)
+                {
+                    sbox.SetValue(s, sbox.Count());
+                }
+            }
+
+            sr.Close();
+            f.Close();
+
+        }
         private string HexToBin32(string hex)
         {
-            return "";
+            return Convert.ToString(Convert.ToInt32(hex, 16), 2);
         }
 
         public string PBox(string message)
         {
-            //fill the ints tab with int between 0 and 31
-            //each number is present only once
+            
 
 
             int index;
-            int[] intsRes = new int[32];
+            char[] charRes = new char[32];
+            string strRes= "";
             
-            int[] ints = new int[32] {1,4,6,18,28,12,24,3,17,21,8,5,2,7,26,9,31,20,25, 14, 19, 13, 3, 10, 15, 16, 27, 30, 29, 11, 22, 23 };
+            int[] ints = new int[32] {9,17,23,31,13,28,2,18,24,16,30,6,26,20,10,1,8,14,25, 3, 4, 29, 11, 19, 32, 12, 22, 7, 5, 27, 15, 21 };
             
             
             for (int i = 0; i < ints.Length; i++)
             {
-                intsRes[i] = 0;
+                charRes[i] = '0';
             }
 
             for (int i = 0; i < ints.Length; i++)
             {
                 index = ints[i];
 
-                if (intsRes[index] != message[i])
+                if (message[i] != '0')
                 {
-                    intsRes[index] = message[i];
+                    charRes[index - 1] = '1';
                 }
             }
-            return intsRes.ToString();
+
+            foreach(char c in charRes)
+            {
+                 strRes += c; 
+            }
+            return strRes;
         }
 
         public string SBox(string message)
