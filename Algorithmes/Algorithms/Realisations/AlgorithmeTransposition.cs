@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,19 +86,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
 
             // Trie la liste par caractère
-            charPos.Sort(new LambdaComparer<CaracterePosition>(
-                (a, b) =>
-                {
-                    if (a.Caractere == b.Caractere)
-                    {
-                        return a.Position - b.Position;
-                    }
-                    else
-                    {
-                        return a.Caractere - b.Caractere;
-                    }
-                }
-            ));
+            charPos.Sort(new CaracterePositionComparateur());
 
             // renvoie uniquement l'ordre
             return charPos.Select(cpo => cpo.Position);
@@ -119,6 +108,21 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
         {
             get => this.position;
             set => this.position = value;
+        }
+    }
+
+    public class CaracterePositionComparateur : Comparer<CaracterePosition>
+    {
+        public override int Compare(CaracterePosition a, CaracterePosition b)
+        {
+            if (a.Caractere == b.Caractere)
+            {
+                return a.Position - b.Position;
+            }
+            else
+            {
+                return a.Caractere - b.Caractere;
+            }
         }
     }
 }

@@ -48,8 +48,7 @@ namespace CryptoClient.Challenges.Realisations
                         // On récupère la hauteur du tableau
                         else if (i == 2)
                         {
-                            AlgorithmeTransposition t = new AlgorithmeTransposition();
-                            Connexion.EnvoyerMessage(t.HauteurTableau(n, cle).ToString());
+                            Connexion.EnvoyerMessage(AlgorithmeTransposition.HauteurTableau(n, cle).ToString());
                             i = 0;
 
                         }
