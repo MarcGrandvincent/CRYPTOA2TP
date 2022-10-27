@@ -32,6 +32,7 @@ namespace CryptoClient.Challenges
                 case "TRANS1": { challenge = new ChallengeTRANS1(); } break;
                 case "TRANS2": { challenge = new ChallengeTRANS2(); } break;
                 case "FEISTEL1": { challenge = new ChallengeFEISTEL1(); } break;
+                case "FEISTEL2": { challenge = new ChallengeFEISTEL2(); } break;
             }
             return challenge;
         }

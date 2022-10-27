@@ -10,7 +10,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 {
     public class AlgorithmeFeistel
     {
-        string[] sbox;
+        private string[] sbox;
 
         public AlgorithmeFeistel()
         {
@@ -30,16 +30,13 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             f.Close();
 
         }
-        private string HexToBin32(string hex)
+        public string HexToBin32(string hex)
         {
-            return Convert.ToString(Convert.ToInt32(hex, 16), 2);
+            return Convert.ToString(Convert.ToInt32(hex, 8), 2);
         }
 
         public string PBox(string message)
         {
-            
-
-
             int index;
             char[] charRes = new char[32];
             string strRes= "";
@@ -71,7 +68,12 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string SBox(string message)
         {
-            return "";
+            int index;
+            string res;
+
+            index = Convert.ToInt32(message, 2);
+            res = HexToBin32(sbox[index]);
+            return res;
         }
 
         public string EBox(string message)
