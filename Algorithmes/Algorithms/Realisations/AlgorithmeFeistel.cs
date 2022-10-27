@@ -32,12 +32,11 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
             sr.Close();
             f.Close();
-
         }
 
         private string HexToBin32(string hex)
         {
-            return "";
+            return Convert.ToString(Convert.ToInt32(hex,16),2);
         }
 
         public string PBox(string message)
