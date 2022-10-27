@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\sbox.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\sbox.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Program.cs" />
+    <Resource Include="Resources\sbox.txt" />
+  </ItemGroup>
+
+</Project>
