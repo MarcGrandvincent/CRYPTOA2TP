@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CryptoClient.Algorithmes.Algorithms.Realisations
 {
-    public class AlgorithmeFeistel
+    public class AlgorithmeFeistel : IAlgorithm
     {
         private string[] sbox;
 
@@ -17,13 +17,21 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             FileStream f = new FileStream(".\\Resources\\sbox.txt", FileMode.Open);
             StreamReader sr = new StreamReader(f);
 
-            while (sr.EndOfStream)
+            this.sbox = new string[256];
+            int position = 0;
+            while (!sr.EndOfStream)
             {
-                string[] line = sr.ReadLine().Split(',');
-                foreach (string s in line)
+                foreach (string line in sr.ReadLine().Split(',').SkipLast(1))
                 {
-                    sbox.SetValue(s, sbox.Count());
+                    sbox.SetValue(line, position);
+                    position++;
+
                 }
+            }
+
+            foreach (var val in sbox)
+            {
+                Console.WriteLine(val);
             }
 
             sr.Close();
@@ -32,7 +40,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
         }
         public string HexToBin32(string hex)
         {
-            return Convert.ToString(Convert.ToInt32(hex, 8), 2);
+            return Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(32, '0');
         }
 
         public string PBox(string message)
@@ -68,17 +76,31 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string SBox(string message)
         {
-            int index;
-            string res;
-
-            index = Convert.ToInt32(message, 2);
-            res = HexToBin32(sbox[index]);
-            return res;
+            int index = Convert.ToInt32(message, 2);
+            Console.WriteLine($"Index : {index}");
+            string sboxd = sbox[index];
+            Console.WriteLine($"Valeur SBOX : {sboxd}");
+            return HexToBin32(sboxd);
         }
 
         public string EBox(string message)
         {
-            return "";
+            string result = "";
+            for(int i = 0; i < message.Length; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        result += message[i];
+                    }
+                }
+                else
+                {
+                    result += message[i];
+                }
+            }
+            return result;
         }
 
         private string Add32(string nb1, string nb2)
@@ -93,7 +115,11 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string ClePartielle(string cle, int numTour)
         {
-            return "";
+            AlgorithmeCesar algoc = new AlgorithmeCesar();
+            AlgorithmeVigenere algov = new AlgorithmeVigenere();
+            string result = cle;
+            result = algov.Chiffrer(result,algoc.Chiffrer(result,numTour.ToString()));
+            return result;
         }
 
         private string TourDechiffrement(string message, string cle, int numTour)
@@ -101,5 +127,14 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             return "";
         }
 
+        public string Chiffrer(string message, string cle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Dechiffre(string message, string cle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
