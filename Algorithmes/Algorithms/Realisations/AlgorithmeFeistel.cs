@@ -17,13 +17,21 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             FileStream f = new FileStream(".\\Resources\\sbox.txt", FileMode.Open);
             StreamReader sr = new StreamReader(f);
 
-            while (sr.EndOfStream)
+            this.sbox = new string[256];
+            int position = 0;
+            while (!sr.EndOfStream)
             {
-                string[] line = sr.ReadLine().Split(',');
-                foreach (string s in line)
+                foreach (string line in sr.ReadLine().Split(',').SkipLast(1))
                 {
-                    sbox.SetValue(s, sbox.Count());
+                    sbox.SetValue(line, position);
+                    position++;
+
                 }
+            }
+
+            foreach (var val in sbox)
+            {
+                Console.WriteLine(val);
             }
 
             sr.Close();
@@ -32,7 +40,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
         }
         public string HexToBin32(string hex)
         {
-            return Convert.ToString(Convert.ToInt32(hex, 8), 2);
+            return Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(32, '0');
         }
 
         public string PBox(string message)
@@ -68,12 +76,11 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string SBox(string message)
         {
-            int index;
-            string res;
-
-            index = Convert.ToInt32(message, 2);
-            res = HexToBin32(sbox[index]);
-            return res;
+            int index = Convert.ToInt32(message, 2);
+            Console.WriteLine($"Index : {index}");
+            string sboxd = sbox[index];
+            Console.WriteLine($"Valeur SBOX : {sboxd}");
+            return HexToBin32(sboxd);
         }
 
         public string EBox(string message)
