@@ -6,13 +6,10 @@ using System.Text;
 
 namespace CryptoClient.Challenges.Realisations
 {
-    public class ChallengeFEISTEL1 : IChallenge
+    public class ChallengeFEISTEL2 : IChallenge
     {
-        private string n;
-        private string cle;
         public void Executer()
         {
-
             AlgorithmeFeistel feistel = new AlgorithmeFeistel();
             Connexion.EnvoyerMessage("OK");
             string message = "";
@@ -23,7 +20,7 @@ namespace CryptoClient.Challenges.Realisations
 
             while (message != "END")
             {
-                res = feistel.PBox(message);
+                res = feistel.HexToBin32(feistel.SBox(message));
                 Connexion.EnvoyerMessage(res);
                 Console.WriteLine(">>" + res);
 
@@ -35,6 +32,5 @@ namespace CryptoClient.Challenges.Realisations
             }
 
         }
-        
     }
 }

@@ -41,10 +41,9 @@ namespace CryptoClient.Challenges.Realisations
                         // On récupère la hauteur du tableau
                         else if (i == 2)
                         {
-                            AlgorithmeTransposition t = new AlgorithmeTransposition();
 
                             string s = "";
-                            foreach (int j in t.CleToOrdre(cle))
+                            foreach (int j in AlgorithmeTransposition.CleToOrdre(cle))
                             {
                                 s += j + " ";
                             }
