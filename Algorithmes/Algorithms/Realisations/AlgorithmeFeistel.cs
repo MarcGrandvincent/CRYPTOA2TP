@@ -119,7 +119,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             huit = SBox(huit);
             vingtquatre = EBox(vingtquatre);
             result = Add32(huit, vingtquatre);
-            return result;
+            return PBox(result);
         }
 
         public string ClePartielle(string cle, int numTour)
