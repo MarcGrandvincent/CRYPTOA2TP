@@ -16,19 +16,14 @@ namespace CryptoClient.Challenges.Realisations
             string res = "";
 
             message = Connexion.RecevoirMessage();
-            Console.WriteLine("<<" + message);
 
             while (message != "END")
             {
-                res = feistel.HexToBin32(feistel.SBox(message));
+                res = feistel.SBox(message);
                 Connexion.EnvoyerMessage(res);
-                Console.WriteLine(">>" + res);
 
                 message = Connexion.RecevoirMessage();
-                Console.WriteLine("<<" + message);
-
                 message = Connexion.RecevoirMessage();
-                Console.WriteLine("<<" + message);
             }
 
         }

@@ -6,18 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\sbox.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\sbox.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Program.cs" />
     <Resource Include="Resources\sbox.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\sbox.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
