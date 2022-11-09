@@ -110,7 +110,23 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string F(string message, string cle)
         {
-            return "";
+            string result = "";
+            string huit = "";
+            string vingtquatre = "";
+            AlgorithmeTransposition t = new AlgorithmeTransposition();
+            result = t.Chiffrer(message, cle);
+            for (int i = 0; i < 8; i++)
+            {
+                huit += result[i];
+            }
+            for (int i = 8; i < 32; i++)
+            {
+                vingtquatre += result[i];
+            }
+            huit = SBox(huit);
+            vingtquatre = EBox(vingtquatre);
+            result = Add32(huit, vingtquatre);
+            return result;
         }
 
         public string ClePartielle(string cle, int numTour)
