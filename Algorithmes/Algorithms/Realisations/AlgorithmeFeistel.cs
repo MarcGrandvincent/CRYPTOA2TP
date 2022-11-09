@@ -151,7 +151,13 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         public string Dechiffre(string message, string cle)
         {
-            throw new NotImplementedException();
+            string res = "";
+
+            res = TourDechiffrement(message, cle, 2);
+            res = TourDechiffrement(res, cle, 1);
+
+            return res;
+               
         }
     }
 }
