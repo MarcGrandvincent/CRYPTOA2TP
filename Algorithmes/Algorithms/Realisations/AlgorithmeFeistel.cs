@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CryptoClient.Algorithmes.Algorithms.Realisations
 {
-    public class AlgorithmeFeistel
+    public class AlgorithmeFeistel : IAlgorithm
     {
         private string[] sbox;
 
@@ -127,5 +127,14 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             return "";
         }
 
+        public string Chiffrer(string message, string cle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Dechiffre(string message, string cle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
