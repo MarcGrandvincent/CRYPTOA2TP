@@ -140,7 +140,11 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
 
         private string TourDechiffrement(string message, string cle, int numTour)
         {
-            return "";
+            string[] M = message.Split(message, 32);
+            string K = ClePartielle(cle,numTour);
+            string fm = F(M[0], K);
+            string res = M[1] + fm;
+            return res;
         }
 
         public string Chiffrer(string message, string cle)
