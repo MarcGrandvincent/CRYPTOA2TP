@@ -36,6 +36,7 @@ namespace CryptoClient.Challenges
                 case "FEISTEL3": { challenge = new ChallengeFEISTEL3(); } break;
                 case "FEISTEL4": { challenge = new ChallengeFEISTEL4(); } break;
                 case "FEISTEL5": { challenge = new ChallengeFEISTEL5(); } break;
+                case "FEISTEL6": { challenge = new ChallengeFEISTEL6(); } break;
             }
             return challenge;
         }

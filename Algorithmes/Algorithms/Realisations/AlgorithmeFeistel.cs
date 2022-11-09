@@ -72,9 +72,9 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
         public string SBox(string message)
         {
             int index = Convert.ToInt32(message, 2);
-            Console.WriteLine($"Index : {index}");
+            //Console.WriteLine($"Index : {index}");
             string sboxd = sbox[index];
-            Console.WriteLine($"Valeur SBOX : {sboxd}");
+            //Console.WriteLine($"Valeur SBOX : {sboxd}");
             return HexToBin32(sboxd);
         }
 
@@ -135,13 +135,15 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             return result;
         }
 
-        private string TourDechiffrement(string message, string cle, int numTour)
+        public string TourDechiffrement(string message, string cle, int numTour)
         {
-            string[] M = message.Split(message, 32);
+            AlgorithmeXOR algorithmeXOR = new AlgorithmeXOR();
+            string C1 = message.Substring(0, 32);
+            string C2 = message.Substring(32, 32);
             string K = ClePartielle(cle,numTour);
-            string fm = F(M[0], K);
-            string res = Add32(fm, M[1]);
-            return res;
+            string fm = F(C2, K);
+            string res = algorithmeXOR.Chiffrer(C1, fm);
+            return C2 + res;
         }
 
         public string Chiffrer(string message, string cle)
@@ -159,5 +161,6 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             return res;
                
         }
+
     }
 }

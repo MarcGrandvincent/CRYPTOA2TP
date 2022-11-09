@@ -24,11 +24,9 @@ namespace CryptoClient.Challenges.Realisations
             {
                 res = feistel.Dechiffre(message,cle);
                 Connexion.EnvoyerMessage(res);
-                Console.WriteLine(">>" + res);
-
-                message = Connexion.RecevoirMessage();
                 
-
+                Connexion.RecevoirMessage();
+                
                 message = Connexion.RecevoirMessage();
                 cle = Connexion.RecevoirMessage();
             }

@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\PlanChiffre.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\sbox.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
