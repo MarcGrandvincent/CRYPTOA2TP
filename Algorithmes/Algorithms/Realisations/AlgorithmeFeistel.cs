@@ -140,7 +140,7 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             string[] M = message.Split(message, 32);
             string K = ClePartielle(cle,numTour);
             string fm = F(M[0], K);
-            string res = M[1] + fm;
+            string res = Add32(fm, M[1]);
             return res;
         }
 
