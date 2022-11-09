@@ -31,6 +31,9 @@ namespace CryptoClient.Challenges
                 case "XOR3": { challenge = new ChallengeXOR3(); } break;
                 case "TRANS1": { challenge = new ChallengeTRANS1(); } break;
                 case "TRANS2": { challenge = new ChallengeTRANS2(); } break;
+                case "FEISTEL3": { challenge = new ChallengeFEISTEL3(); } break;
+                case "FEISTEL4": { challenge = new ChallengeFEISTEL4(); } break;
+                
             }
             return challenge;
         }
