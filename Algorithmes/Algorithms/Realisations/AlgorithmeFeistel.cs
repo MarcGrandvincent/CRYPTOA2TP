@@ -29,11 +29,6 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
                 }
             }
 
-            foreach (var val in sbox)
-            {
-                Console.WriteLine(val);
-            }
-
             sr.Close();
             f.Close();
 
@@ -103,9 +98,11 @@ namespace CryptoClient.Algorithmes.Algorithms.Realisations
             return result;
         }
 
-        private string Add32(string nb1, string nb2)
+        public string Add32(string nb1, string nb2)
         {
-            return "";
+            Int64 uint1 = Convert.ToInt64(nb1, 2);
+            Int64 uint2 = Convert.ToInt64(nb2, 2);
+            return Convert.ToString((uint1 + uint2) % (1L << 32), 2).PadLeft(32, '0');
         }
 
         public string F(string message, string cle)
